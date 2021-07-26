@@ -1,5 +1,4 @@
-﻿using Dapper;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using PerformanceTests.Models;
 using System;
 using System.Collections.Generic;
@@ -65,29 +64,29 @@ namespace PerformanceTests
             }
             catch (Exception e) { return e.Message; }
         }
-        public static string InsertingDataDapper()
-        {
-            List<Data> l = new List<Data>();
-            for (int i = 0; i < 2000; i++)
-            {
-                l.Add(new Data
-                {
-                    Date = DateTime.Now.ToString(),
-                    Guid = Guid.NewGuid().ToString()
-                }); ;
-            }
-            Stopwatch stop_watch = Stopwatch.StartNew();
-            SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=PerformanceTest;Integrated Security=True");
+        //public static string InsertingDataDapper()
+        //{
+        //    List<Data> l = new List<Data>();
+        //    for (int i = 0; i < 2000; i++)
+        //    {
+        //        l.Add(new Data
+        //        {
+        //            Date = DateTime.Now.ToString(),
+        //            Guid = Guid.NewGuid().ToString()
+        //        }); ;
+        //    }
+        //    Stopwatch stop_watch = Stopwatch.StartNew();
+        //    SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=PerformanceTest;Integrated Security=True");
 
-            conn.Open();
-            foreach (var d in l)
-            {
+        //    conn.Open();
+        //    foreach (var d in l)
+        //    {
                 
-                conn.Execute($"insert into Data values ('{d.Date}',' {d.Guid.ToString()}')");
-            }
-            TimeSpan checkPoint = stop_watch.Elapsed;
-            return checkPoint.ToString();
-        }
+        //        conn.Execute($"insert into Data values ('{d.Date}',' {d.Guid.ToString()}')");
+        //    }
+        //    TimeSpan checkPoint = stop_watch.Elapsed;
+        //    return checkPoint.ToString();
+        //}
 
     }
 }

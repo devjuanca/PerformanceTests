@@ -1,23 +1,48 @@
-﻿using System;
+﻿using CustomTimer;
+using DapperORM;
+using EFCore;
+using SqlClient;
+using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace PerformanceTests
 {
     class Program
     {
-       static void Main(string[] args)
+       static async Task Main(string[] args)
         {
-           
-            Console.WriteLine("Inserting 2000 rows using EF Core 3.1");
-            Console.WriteLine(DataWork.InsertingDataEF());
-          
-            Console.WriteLine("Inserting 2000 rows using Plumbing Code");
-            Console.WriteLine(DataWork.InsertingDataPlumbing());
+            Timer.Start();
+            await EFBigQuery.GetData();
+            Timer.End();
+            Console.WriteLine("Selecting 600000 rows from SQL Server using Entity Framework Core");
+            Console.WriteLine(Timer.Duration());
 
-            Console.WriteLine("Inserting 2000 rows using Dapper");
-            Console.WriteLine(DataWork.InsertingDataDapper());
+            Console.WriteLine("\n");
 
-            Console.ReadLine();
+            Timer.Start();
+            await EFBigQueryStoredProcedure.GetData();
+            Timer.End();
+            Console.WriteLine("Selecting 600000 rows from SQL Server using Entity Framework Core and Stored Procedure");
+            Console.WriteLine(Timer.Duration());
+
+            Console.WriteLine("\n");
+
+            Timer.Start();
+            await SqlClientBigQuery.GetData();
+            Timer.End();
+            Console.WriteLine("Selecting 600000 rows from SQL Server using SqlClient and Stored Procedure");
+            Console.WriteLine(Timer.Duration());
+
+            Console.WriteLine("\n");
+
+            Timer.Start();
+            await DapperBigQuery.GetData();
+            Timer.End();
+            Console.WriteLine("Selecting 600000 rows from SQL Server using Dapper and Stored Procedure");
+            Console.WriteLine(Timer.Duration());
+
+
         }
     }
 }
