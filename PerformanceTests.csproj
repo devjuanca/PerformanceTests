@@ -12,7 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CustomTimer\CustomTimer.csproj" />
     <ProjectReference Include="..\DapperORM\DapperORM.csproj" />
-    <ProjectReference Include="..\Dapper\SqlClient.csproj" />
+    <ProjectReference Include="..\SqlClient\SqlClient.csproj" />
     <ProjectReference Include="..\EFCore\EFCore.csproj" />
   </ItemGroup>
 

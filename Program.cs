@@ -12,37 +12,31 @@ namespace PerformanceTests
     {
        static async Task Main(string[] args)
         {
-            Timer.Start();
-            await EFBigQuery.GetData();
-            Timer.End();
-            Console.WriteLine("Selecting 600000 rows from SQL Server using Entity Framework Core");
-            Console.WriteLine(Timer.Duration());
+            //Entity Framework Core
+            Console.WriteLine("Selecionando 600000 filas usando SQL Server y Entity Framework Core - .ToListAsync()");
+            await ApplyTests.EFCore_Test();
 
-            Console.WriteLine("\n");
-
-            Timer.Start();
-            await EFBigQueryStoredProcedure.GetData();
-            Timer.End();
-            Console.WriteLine("Selecting 600000 rows from SQL Server using Entity Framework Core and Stored Procedure");
-            Console.WriteLine(Timer.Duration());
-
-            Console.WriteLine("\n");
-
-            Timer.Start();
-            await SqlClientBigQuery.GetData();
-            Timer.End();
-            Console.WriteLine("Selecting 600000 rows from SQL Server using SqlClient and Stored Procedure");
-            Console.WriteLine(Timer.Duration());
-
-            Console.WriteLine("\n");
-
-            Timer.Start();
-            await DapperBigQuery.GetData();
-            Timer.End();
-            Console.WriteLine("Selecting 600000 rows from SQL Server using Dapper and Stored Procedure");
-            Console.WriteLine(Timer.Duration());
+            Console.WriteLine();
 
 
+            //Entity Framework Core & Stored Procedure
+            Console.WriteLine("Selecionando 600000 filas usando SQL Server y Entity Framework Core con Procedimiento Almacenado - .FromSqlRaw()");
+            await ApplyTests.EFCoreWithStoredProcedure_Test();
+
+            Console.WriteLine();
+
+
+            //Dapper Core & Stored Procedure
+            Console.WriteLine("Selecionando 600000 filas usando SQL Server y Dapper con Procedimiento Almacenado");
+            await ApplyTests.DapperWithStoredProcedure_Test();
+
+            Console.WriteLine();
+
+            //Sql Client & Stored Procedure
+            Console.WriteLine("Selecionando 600000 filas usando SQL Server y SqlClient con Procedimiento Almacenado");
+            await ApplyTests.SqlClientWithStoredProcedure_Test();
+
+            Console.ReadLine();
         }
     }
 }
