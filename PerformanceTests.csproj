@@ -1,19 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-	  <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.90" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
+		<PackageReference Include="BenchmarkDotNet.Annotations" Version="0.13.1" />
+		<PackageReference Include="Dapper" Version="2.0.123" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CustomTimer\CustomTimer.csproj" />
-    <ProjectReference Include="..\DapperORM\DapperORM.csproj" />
-    <ProjectReference Include="..\SqlClient\SqlClient.csproj" />
-    <ProjectReference Include="..\EFCore\EFCore.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\CustomTimer\CustomTimer.csproj" />
+		<ProjectReference Include="..\DapperORM\DapperORM.csproj" />
+		<ProjectReference Include="..\SqlClient\SqlClient.csproj" />
+		<ProjectReference Include="..\EFCore\EFCore.csproj" />
+	</ItemGroup>
 
 </Project>
